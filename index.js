@@ -15,12 +15,17 @@ app.use(cors())
 app.use('/persons', manageBooksRoutes);
 app.use('/', testRoutes);
 
+console.log("Loading");
+console.log(process.env.MONGO_URL);
+console.log(process.env.PORT);
+console.log(process.env.DATABASE_URL);
+app.listen(process.env.PORT);
 
-mongoose.connect(process.env.MONGO_URL,
-{ useNewUrlParser: true, useUnifiedTopology: true })
-.then(result => {
-    app.listen(80);
-})
-.catch(err => {
-    console.log(err);
-})
+// mongoose.connect(process.env.MONGO_URL,
+// { useNewUrlParser: true, useUnifiedTopology: true })
+// .then(result => {
+//     app.listen(80);
+// })
+// .catch(err => {
+//     console.log(err);
+// })
