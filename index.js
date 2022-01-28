@@ -4,6 +4,7 @@ const cors = require('cors')
 const mongoose = require('mongoose');
 
 const manageBooksRoutes = require('./routes/managePersons')
+const testRoutes = require('./routes/test')
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json())// json
 app.use(cors())
 
 app.use('/persons', manageBooksRoutes);
+app.use('/', testRoutes);
 
 
 mongoose.connect(process.env.MONGO_URL,
