@@ -1,0 +1,36 @@
+{
+  "name": "suportclassmba",
+  "version": "1.0.0",
+  "description": "Server in Node JS to Support Classes in MBA FIAP",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon start",
+    "seed": "nodemon makeSeed.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://joserrodrigues@github.com/joserrodrigues/FIAPMbaSuportClassReact.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joserrodrigues/FIAPMbaSuportClassReact/issues"
+  },
+  "homepage": "https://github.com/joserrodrigues/FIAPMbaSuportClassReact#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "faker-br": "^0.4.1",
+    "mongoose": "^6.1.8",
+    "mongoose-data-seed": "^2.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "mdSeed": {
+    "seedersFolder": "seeders"
+  }
+}
