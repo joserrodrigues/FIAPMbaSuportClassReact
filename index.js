@@ -4,7 +4,7 @@ const express = require('express');
 // const mongoose = require('mongoose');
 
 // const manageBooksRoutes = require('./routes/managePersons')
-const testRoutes = require('./routes/test.js')
+const testRoutes = require('./Routes/test')
 
 const app = express();
 
