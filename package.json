@@ -4,7 +4,7 @@
   "description": "Server in Node JS to Support Classes in MBA FIAP",
   "main": "index.js",
   "scripts": {
-    "start": "npm start",
+    "start": "node index.js",
     "dev": "nodemon start",
     "seed": "nodemon makeSeed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
