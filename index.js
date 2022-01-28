@@ -19,9 +19,10 @@ console.log("Loading");
 console.log(process.env.MONGO_URL);
 console.log(process.env.PORT);
 console.log(process.env.DATABASE_URL);
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Our app is running on port ${PORT}`);
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
+server.listen(server_port, server_host, function () {
+    console.log('Listening on port %d', server_port);
 });
 
 // mongoose.connect(process.env.MONGO_URL,
