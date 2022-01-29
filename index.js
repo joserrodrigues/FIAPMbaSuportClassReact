@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const manageBooksRoutes = require('./Routes/managePersons')
 const authRoutes = require('./Routes/manageAuthPersons');
+const nextRoutes = require('./Routes/manageNext');
 const testRoutes = require('./Routes/test')
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors())
 
 app.use('/persons', manageBooksRoutes);
 app.use('/authPersons', authRoutes);
+app.use('/api', nextRoutes);
 app.use('/', testRoutes);
 
 app.use((error, req, res, next) => {
