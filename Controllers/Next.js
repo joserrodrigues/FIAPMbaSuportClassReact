@@ -7,3 +7,18 @@ exports.getItems = (req, res, next) => {
         { id: 4, name: "4" },
     ]);
 }
+
+exports.getUserInfo = (req, res, next) => {
+
+    const id = req.params.id;
+    const search = req.query.search;
+
+    console.log(id);
+    console.log(search);
+
+    res.status(200).json({
+        id: id,
+        name: search + ' Doe',
+        phone: '1198986565'
+    }) 
+}
