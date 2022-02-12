@@ -1,4 +1,5 @@
 const Persons = require('../Models/Persons');
+const StoreProducts = require('../Models/StoreProducts');
 
 const data = [
   {
@@ -224,14 +225,376 @@ const data = [
 
 ];
 
+
+const dataProducts = [
+  {
+    name: 'Console Nintendo Switch 32gb - Azul E Vermelho',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/1951732/6/1951732670_1GG.jpg',
+    price: '2499.99',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 - Tatuapé - SP",
+        latitude: -23,
+        longitude: -46
+      }
+    ],
+  },
+  {
+    name: 'Console Xbox Series S 500gb Ssd',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/2117190/5/2117190565_1GG.jpg',
+    price: '2549.99',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },
+      {
+        name: "Loja Villa Lobos",
+        address: "Avenida José César de Oliveira, S/N São Paulo - SP CEP: 05317 - 000",
+        latitude: -23.5404196,
+        longitude: -46.7325755
+      },
+      {
+        name: "Loja Anchieta",
+        address: "Via Anchieta, 3398 São Paulo - SP CEP: 04246 - 900",
+        latitude: -23.6271593,
+        longitude: -46.59813
+      },
+      {
+        name: "Loja Aricanduva",
+        address: "Avenida Rio das Pedras, 555 São Paulo - SP CEP: 03453 - 000",
+        latitude: -23.5602374,
+        longitude: -46.5163447
+      },
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+  {
+    name: 'Controle Sem Fio Dualshock 4 Preto - Ps4',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/133746/7/133746754_1GG.jpg',
+    price: '299.90',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },
+      {
+        name: "Loja Aricanduva",
+        address: "Avenida Rio das Pedras, 555 São Paulo - SP CEP: 03453 - 000",
+        latitude: -23.5602374,
+        longitude: -46.5163447
+      },
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+  {    
+    name: 'Livro - The Kiss Of Deception',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/126908/0/126908049_1GG.jpg',
+    price: '41.90',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 - Tatuapé - SP",
+        latitude: -23,
+        longitude: -46
+      }
+    ],
+  },
+  {    
+    name: 'Box Trilogia Sombra E Ossos (Acompanha 3 Pôsteres + Sacola Ecobag) - 1ª Ed.',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/3636586/9/3636586991_1GG.jpg',
+    price: '119.90',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },
+      {
+        name: "Loja Villa Lobos",
+        address: "Avenida José César de Oliveira, S/N São Paulo - SP CEP: 05317 - 000",
+        latitude: -23.5404196,
+        longitude: -46.7325755
+      },
+      {
+        name: "Loja Anchieta",
+        address: "Via Anchieta, 3398 São Paulo - SP CEP: 04246 - 900",
+        latitude: -23.6271593,
+        longitude: -46.59813
+      },
+    ],
+  },
+  {    
+    name: 'Coleção Agatha Christie Clássicos + Ecobag - Assassinato No Expresso Do Oriente + Mistério No Caribe + Corpo Na Biblioteca + Punição Para A Inocência',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/3321994/0/3321994026_1GG.jpg',
+    price: '104.90',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },
+      {
+        name: "Loja Villa Lobos",
+        address: "Avenida José César de Oliveira, S/N São Paulo - SP CEP: 05317 - 000",
+        latitude: -23.5404196,
+        longitude: -46.7325755
+      },
+    ],
+  },
+  {    
+    name: 'Livro - Drácula - Dark Edition',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/134366/0/134366016_1GG.jpg',
+    price: '49.90',
+    stores: [
+      {
+        name: "Loja Villa Lobos",
+        address: "Avenida José César de Oliveira, S/N São Paulo - SP CEP: 05317 - 000",
+        latitude: -23.5404196,
+        longitude: -46.7325755
+      },
+      {
+        name: "Loja Anchieta",
+        address: "Via Anchieta, 3398 São Paulo - SP CEP: 04246 - 900",
+        latitude: -23.6271593,
+        longitude: -46.59813
+      },
+      {
+        name: "Loja Aricanduva",
+        address: "Avenida Rio das Pedras, 555 São Paulo - SP CEP: 03453 - 000",
+        latitude: -23.5602374,
+        longitude: -46.5163447
+      },
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+  {    
+    name: 'Monitor 27 Lg Full Hd, Led Ips, 75 Hz, 5ms, Freesync, Hdmi, Vga, 27mp400-B, Preto',
+    image: 'https://images-submarino.b2w.io/produtos/4580555474/imagens/monitor-27-lg-full-hd-led-ips-75-hz-5ms-freesync-hdmi-vga-27mp400-b-preto/4580555474_1_large.jpg',
+    price: '1199.98',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },      
+    ],
+  },
+  {    
+    name: 'Headset Gamer A40 Mixamp Pro Tr Gen4 Xbox One/Pc - Astro',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/134494/0/134494051_1GG.jpg',
+    price: '1299.98',
+    stores: [
+    ],
+  },
+  {    
+    name: 'Master System Evolution Blue Com 132 Jogos Na Memória - Tectoy',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/109966/2/109966247_1GG.jpg',
+    price: '256.67',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },      
+      {
+        name: "Loja Aricanduva",
+        address: "Avenida Rio das Pedras, 555 São Paulo - SP CEP: 03453 - 000",
+        latitude: -23.5602374,
+        longitude: -46.5163447
+      },
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+  {    
+    name: 'Game Cyber Punk 2077 - Ps4',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/1466225/4/1466225463_1GG.jpg',
+    price: '37.10',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },
+      {
+        name: "Loja Villa Lobos",
+        address: "Avenida José César de Oliveira, S/N São Paulo - SP CEP: 05317 - 000",
+        latitude: -23.5404196,
+        longitude: -46.7325755
+      },
+      {
+        name: "Loja Anchieta",
+        address: "Via Anchieta, 3398 São Paulo - SP CEP: 04246 - 900",
+        latitude: -23.6271593,
+        longitude: -46.59813
+      },
+      {
+        name: "Loja Aricanduva",
+        address: "Avenida Rio das Pedras, 555 São Paulo - SP CEP: 03453 - 000",
+        latitude: -23.5602374,
+        longitude: -46.5163447
+      },
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+  {    
+    name: 'Game Fifa 22 - Ps4',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/3795932/9/3795932927_1GG.jpg',
+    price: '206.91',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },
+      {
+        name: "Loja Villa Lobos",
+        address: "Avenida José César de Oliveira, S/N São Paulo - SP CEP: 05317 - 000",
+        latitude: -23.5404196,
+        longitude: -46.7325755
+      },
+      {
+        name: "Loja Anchieta",
+        address: "Via Anchieta, 3398 São Paulo - SP CEP: 04246 - 900",
+        latitude: -23.6271593,
+        longitude: -46.59813
+      },
+      {
+        name: "Loja Aricanduva",
+        address: "Avenida Rio das Pedras, 555 São Paulo - SP CEP: 03453 - 000",
+        latitude: -23.5602374,
+        longitude: -46.5163447
+      },
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+  {    
+    name: 'Game Far Cry 6 - Ps4',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/3770273/9/3770273902_1GG.jpg',
+    price: '185.99',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },     
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+  {    
+    name: 'Game Grand Theft Auto The Trilogy – The Definitive Edition - Ps4',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/4280032/8/4280032815_1GG.jpg',
+    price: '169.99',
+    stores: [
+
+      {
+        name: "Loja Villa Lobos",
+        address: "Avenida José César de Oliveira, S/N São Paulo - SP CEP: 05317 - 000",
+        latitude: -23.5404196,
+        longitude: -46.7325755
+      },
+      {
+        name: "Loja Anchieta",
+        address: "Via Anchieta, 3398 São Paulo - SP CEP: 04246 - 900",
+        latitude: -23.6271593,
+        longitude: -46.59813
+      },
+    ],
+  },
+  {    
+    name: 'Game The Last Of Us Part Ii - Ps4',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/1459449/0/1459449098_1GG.jpg',
+    price: '161.91',
+    stores: [
+      {
+        name: "Loja Tatuape",
+        address: "Avenida Salim Farah Malu, 500 São Paulo - SP CEP: 03076 - 000",
+        latitude: -23.5559142,
+        longitude: -46.5774648
+      },
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+  {    
+    name: 'Game - Red Dead Redemption 2 - Ps4',
+    image: 'https://images-submarino.b2w.io/produtos/01/00/img/133806/7/133806753_1GG.jpg',
+    price: '147.73',
+    stores: [
+      {
+        name: "Loja Anália Franco",
+        address: "Avenida Regente Feijó, 1759 São Paulo - SP CEP: 03550-100",
+        latitude: -23.5613655,
+        longitude: -46.5603552
+      },
+    ],
+  },
+];
+
 exports.remove = async () => {
   console.log("Removing")
-  const returnInfo = await Persons.deleteMany();
+  let returnInfo = await Persons.deleteMany();
+  console.log(returnInfo);
+
+  returnInfo = await StoreProducts.deleteMany();
   console.log(returnInfo);
 }
 exports.run = async () => {
-  const returnInfo = await Persons.create(data);
+  let returnInfo = await Persons.create(data);
   console.log(returnInfo);
-  ;
+  
+  returnInfo = await StoreProducts.create(dataProducts);
+  console.log(returnInfo);
 }
 

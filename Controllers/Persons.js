@@ -172,6 +172,10 @@ exports.updatePerson = (req, res, next) => {
         })
         .then(result => {
             res.status(200).json({
+                codeInfo: {
+                    id: 1,
+                    message: "Person changed successfull",
+                },                
                 person: updatedPerson
             });
         })

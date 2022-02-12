@@ -3,9 +3,12 @@ const express = require('express');
 const cors = require('cors')
 const mongoose = require('mongoose');
 
+const swagger = require('./Swagger/Swagger')
+
 const manageBooksRoutes = require('./Routes/managePersons')
 const authRoutes = require('./Routes/manageAuthPersons');
 const nextRoutes = require('./Routes/manageNext');
+const storeProductsRoutes = require('./Routes/manageStoreProducts');
 const testRoutes = require('./Routes/test')
 
 const app = express();
@@ -14,9 +17,12 @@ app.use(express.urlencoded({ extended: true })) // x-www-form-urlencoded
 app.use(express.json())// json
 app.use(cors())
 
+swagger.mountSwagger(app);
+
 app.use('/persons', manageBooksRoutes);
 app.use('/authPersons', authRoutes);
 app.use('/api', nextRoutes);
+app.use('/storeProducts', storeProductsRoutes);
 app.use('/', testRoutes);
 
 app.use((error, req, res, next) => {
