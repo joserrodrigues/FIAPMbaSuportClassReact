@@ -252,13 +252,12 @@ exports.manageFavorite = (req, res, next) => {
 
             let newArray = [];
             if (user.favProducts.includes(productID)){
-                newArray = user.favProducts.filter(e =>{
-                    console.log(e);
+                newArray = user.favProducts.filter(e =>{                    
 
-                    if (e !== productID){
-                        return false;
+                    if (e.toString() !== productID){
+                        return true;
                     }
-                    return true;
+                    return false;
                 })
             } else {
                 newArray = [... user.favProducts];
@@ -266,7 +265,6 @@ exports.manageFavorite = (req, res, next) => {
             }
 
             user.favProducts = newArray;
-            console.log(user);
             return user.save();
         })
         .then(result => {
