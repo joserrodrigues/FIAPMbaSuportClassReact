@@ -95,7 +95,7 @@ router.put('/signup', [
 /**
  * @swagger
  *  /storeProducts/login:
- *   put:
+ *   post:
  *     tags:
  *       - "Aula React: MBA Presencial - Trabalho Final "
  *     summary: "Login do usuário"
