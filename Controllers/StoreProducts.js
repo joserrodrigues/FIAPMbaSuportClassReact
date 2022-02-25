@@ -64,17 +64,21 @@ exports.login = (req, res, next) => {
                 res.status(201).json({
                     message: "User Not Found",
                 });
-                return;
+                console.log("send Message");
+            } else {
+                loadedUser = user;
+                return bcrypt.compare(password, user.password);
             }
-            loadedUser = user;
-            return bcrypt.compare(password, user.password);
         })
         .then(isEqual => {
+            if(isEqual === undefined){
+                return;
+            }
+            console.log("Check Equal");
             if (!isEqual) {
                 res.status(201).json({
                     message: "User Not Found",
                 });
-                return;
             }
 
             newToken = jwt.sign({
@@ -87,7 +91,10 @@ exports.login = (req, res, next) => {
             loadedUser.token = newToken;
             return loadedUser.save();
         })                
-        .then(isEqual => {            
+        .then(isEqual => {           
+            if (isEqual === undefined) {
+                return;
+            }             
             res.status(200).json({
                 token: newToken,
                 userId: loadedUser._id.toString(),
@@ -187,11 +194,15 @@ exports.getProduct = (req, res, next) => {
                 res.status(202).json({
                     message: "Product Not Found",
                 });
+                return;
             }
             findProduct = product
             return User.findOne({ _id: userID })
         })
         .then(user => {
+            if (user === undefined) {
+                return;
+            } 
             if (!user) {
                 res.status(201).json({
                     message: "User Not Found",
@@ -237,11 +248,15 @@ exports.manageFavorite = (req, res, next) => {
                 res.status(202).json({
                     message: "Product Not Found",
                 });
+                return;
             }
             product = productDoc;
             return User.findOne({ _id: userID })
         })    
         .then(user => {
+            if (user === undefined) {
+                return;
+            } 
             if (!user) {
                 res.status(201).json({
                     message: "User Not Found",
@@ -268,6 +283,9 @@ exports.manageFavorite = (req, res, next) => {
             return user.save();
         })
         .then(result => {
+            if (result === undefined) {
+                return;
+            } 
             if(result){
                 res.status(200).json({
                     message: "User updated",
