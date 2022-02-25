@@ -65,6 +65,7 @@ exports.login = (req, res, next) => {
                     message: "User Not Found",
                 });
                 console.log("send Message");
+                return;
             } else {
                 loadedUser = user;
                 return bcrypt.compare(password, user.password);
@@ -79,6 +80,7 @@ exports.login = (req, res, next) => {
                 res.status(201).json({
                     message: "User Not Found",
                 });
+                return;
             }
 
             newToken = jwt.sign({
