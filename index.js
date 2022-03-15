@@ -9,6 +9,7 @@ const manageBooksRoutes = require('./Routes/managePersons')
 const authRoutes = require('./Routes/manageAuthPersons');
 const nextRoutes = require('./Routes/manageNext');
 const storeProductsRoutes = require('./Routes/manageStoreProducts');
+const manageToysRoutes = require('./Routes/manageToys');
 const testRoutes = require('./Routes/test')
 
 const app = express();
@@ -23,6 +24,7 @@ app.use('/persons', manageBooksRoutes);
 app.use('/authPersons', authRoutes);
 app.use('/api', nextRoutes);
 app.use('/storeProducts', storeProductsRoutes);
+app.use('/toys', manageToysRoutes);
 app.use('/', testRoutes);
 
 app.use((error, req, res, next) => {
