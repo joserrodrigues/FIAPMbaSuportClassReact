@@ -428,7 +428,7 @@ router.get('/product/:productID', authMiddleware, storeProducsController.getProd
  *                          description: Descrição dos erros
  */
 router.post('/manageFavorite', authMiddleware, [    
-    body('productID').trim()
+    body("productID").trim().isMongoId(),
 ], storeProducsController.manageFavorite);
 
 /**
