@@ -55,31 +55,35 @@ exports.login = (req, res, next) => {
     let loadedUser;
     User.findOne({ email: email })
         .then(user => {
-            if (!user) {
-                const error = new Error('User not found');
-                error.statusCode = 401;
-                throw error;
+            if (user) {
+                loadedUser = user;
+                return bcrypt.compare(password, user.password);
+            } else {
+                loadedUser = null;
+                return false;
             }
-            loadedUser = user;
-            return bcrypt.compare(password, user.password);
         })
         .then(isEqual => {
-            if (!isEqual) {
-                const error = new Error('Wrong Password');
-                error.statusCode = 401;
-                throw error;
-            }
-
-            const token = jwt.sign({
-                email: loadedUser.email,
-                id: loadedUser._id.toString()
-            },
-                'dso8icujikl12j3kl134das',
-                { expiresIn: '1h' });
-            res.status(200).json({
-                token: token,
-                userId: loadedUser._id.toString()
-            });
+            if(!loadedUser){
+                res.status(401).json({
+                    message: 'User Not Found'
+                });   
+            } else if (!isEqual) {
+                res.status(401).json({
+                    message: 'Wrong Password'
+                });                   
+            } else {
+                const token = jwt.sign({
+                    email: loadedUser.email,
+                    id: loadedUser._id.toString()
+                },
+                    'dso8icujikl12j3kl134das',
+                    { expiresIn: '1h' });
+                res.status(200).json({
+                    token: token,
+                    userId: loadedUser._id.toString()
+                });
+            }            
         })
         .catch(err => {
             if (!err.statusCode) {
