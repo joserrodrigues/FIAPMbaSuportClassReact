@@ -92,3 +92,75 @@ exports.login = (req, res, next) => {
             throw err;
         })
 }
+
+exports.loginGoogle = (req, res, next) => {
+    console.log("Login Google User");
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        const error = new Error('Validation failed');
+        error.statusCode = 422;
+        error.data = errors.array();
+        throw error;
+    }
+
+    const name = req.body.name;
+    const email = req.body.email;
+    const idGoogle = req.body.idGoogle;
+    let loadedUser;
+    let hashedPassword; 
+
+    bcrypt.hash(idGoogle, 12)
+        .then(hashedPw => {
+            hashedPassword = hashedPw;
+            return User.findOne({ email: email });
+        })
+        .then(user => {
+            if (user) {
+                return user;
+            } else {
+                const user = new User({
+                    email: email,
+                    name: name,
+                    password: hashedPassword
+                });
+                return user.save();
+            }
+        })
+        .then(user => {
+            if(!user){
+                loadedUser = null;
+                return false;
+            } else {
+                loadedUser = user;
+                return bcrypt.compare(idGoogle, user.password);            
+            }            
+        })        
+        .then(isEqual => {
+            if (!loadedUser) {
+                res.status(401).json({
+                    message: 'Error generating User'
+                });
+            } else if (!isEqual) {
+                res.status(401).json({
+                    message: 'Wrong Email and Google ID'
+                });
+            } else {
+                const token = jwt.sign({
+                    email: loadedUser.email,
+                    id: loadedUser._id.toString()
+                },
+                    'dso8icujikl12j3kl134das',
+                    { expiresIn: '1h' });
+                res.status(200).json({
+                    token: token,
+                    userId: loadedUser._id.toString()
+                });
+            }
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            throw err;
+        })
+}

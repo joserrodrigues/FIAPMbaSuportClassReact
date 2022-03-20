@@ -73,7 +73,7 @@ router.put('/signup', [
 /**
  * @swagger
  *  /authPersons/login:
- *   put:
+ *   post:
  *     tags:
  *       - "Aula React: MBA Presencial - Exercício com Autenticação "
  *     summary: "Login do usuário"
@@ -116,6 +116,56 @@ router.post('/login', [
     body('email').trim().isLength({ min: 7 }),
     body('password').trim().not().isEmpty()
 ], authController.login);
+
+/**
+ * @swagger
+ *  /authPersons/loginGoogle:
+ *   post:
+ *     tags:
+ *       - "Aula React: MBA Presencial - Exercício com Autenticação "
+ *     summary: "Login do usuário pelo Google"
+ *     description: "Aula React: Exercício em aula - Realiza o login do usuário pelo Google"
+ *     operationId: "authLoginGoogle"
+ *     consumes:
+ *       - "application/json"
+ *     produces:
+ *       - application/json
+ *     requestBody:
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:      
+ *                 type: string
+ *               email:      
+ *                 type: email
+ *               idGoogle:
+ *                 type: string
+ *             required:
+ *               - email
+ *               - name
+ *               - idGoogle
+ *     responses:
+ *       200:
+ *         description: Sucesso na requisição
+ *         content:
+ *           application/json:
+ *              schema:
+ *                  type: object
+ *                  properties:
+ *                      token:
+ *                          type: string
+ *                          description: JWT connection token
+ *                      userId:
+ *                          type: integer
+ *                          description: user ID
+ */
+router.post('/loginGoogle', [
+    body('name').trim().isLength({ min: 2 }),
+    body('email').trim().isLength({ min: 7 }),
+    body('idGoogle').trim().not().isEmpty()
+], authController.loginGoogle);
 
 /**
  * @swagger

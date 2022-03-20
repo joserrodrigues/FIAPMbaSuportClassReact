@@ -7,22 +7,22 @@ exports.getAllToys = (req, res, next) => {
 
     let totalItems = 0;
     Toys.find().countDocuments()
-    .then(count => {
-        totalItems = count;
-        return Toys.find()
-    })
-    .then(toys => {
-        res.status(200).json({
-            totalItems: totalItems,
-            toys: toys
+        .then(count => {
+            totalItems = count;
+            return Toys.find()
+        })
+        .then(toys => {
+            res.status(200).json({
+                totalItems: totalItems,
+                toys: toys
+            });
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            throw err;
         });
-    })
-    .catch(err => {
-        if (!err.statusCode) {
-            err.statusCode = 500;
-        }
-        throw err;
-    });    
 }
 
 
@@ -61,8 +61,8 @@ exports.getToys = (req, res, next) => {
                 page: currentPage,
                 perPage: perPage,
                 toys: toys
-            });            
-        })        
+            });
+        })
         .catch(err => {
             if (!err.statusCode) {
                 err.statusCode = 500;
@@ -79,7 +79,7 @@ exports.getToy = (req, res, next) => {
     Toys.findById(toyID)
         .then(toy => {
 
-            if (!toy){
+            if (!toy) {
                 res.status(423).json({
                     message: "Toy Not Found",
                 });
@@ -88,7 +88,7 @@ exports.getToy = (req, res, next) => {
             res.status(200).json({
                 toy
             });
-        })        
+        })
         .catch(err => {
             console.log(err);
         });
@@ -131,9 +131,9 @@ exports.addToy = (req, res, next) => {
             toy: toy
         });
     })
-    .catch(err => {
-        console.log(err);
-    })
+        .catch(err => {
+            console.log(err);
+        })
 }
 
 exports.updateToy = (req, res, next) => {
@@ -251,4 +251,54 @@ exports.updateStatusToy = (req, res, next) => {
         .catch(err => {
             console.log(err);
         });
+}
+
+exports.uploadImage = (req, res, next) => {
+    console.log("Updating image");
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({
+            message: 'Validation failed',
+            errors: errors.array()
+        })
+    }
+
+    const gdrive = require("../Services/GDrive/gdrive");
+    const imageBase64 = req.body.image;
+    try{
+        gdrive.imageUpload(imageBase64)
+        .then(id => {
+            console.log("Part 2");
+            console.log(id);
+            res.status(200).json({
+                codeInfo: {
+                    id: 1,
+                    message: "image was uploaded",
+                },
+                info: {
+                    url: "https://drive.google.com/file/d/" + id + "/view?usp=sharing"
+                }
+            });
+        })
+        .catch(e => {
+            console.log(e);
+            res.status(201).json({
+                codeInfo: {
+                    id: -99,
+                    message: "Error uploading file",
+                },
+            });
+        });
+    } catch(e){
+        console.log(e);
+        res.status(201).json({
+            codeInfo: {
+                id: -99,
+                message: "Error uploading file",
+            },
+        });
+    }
+
+
+
 }

@@ -797,5 +797,88 @@ router.put('/updateStatus/:toyID', authMiddleware, [
     body('status').trim().isInt({ min: 0, max: 1 }),
 ], manageToys.updateStatusToy);
 
+/**
+ * @swagger
+ *  /toys/uploadImage:
+ *   post:
+ *     tags:
+ *       - "Aula React: Shift - Toys "
+ *     summary: "Upload a imagem de um brinquedos "
+ *     description: "Aula React: Upload imagem de um brinquedo"
+ *     operationId: "toysuploadimage"
+ *     consumes:
+ *       - "application/json"
+ *     produces:
+ *       - application/json
+ *     security:
+ *      - bearerAuth: []    
+ *     requestBody:
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             properties:
+ *                image:
+ *                  type: string 
+ *                  description: imagem em uma string base64
+ *             required:
+ *               - status
+ *     responses:
+ *       200:
+ *         description: Sucesso na requisição
+ *         content:
+ *           application/json:
+ *              schema:
+ *                  type: object
+ *                  properties:
+ *                      codeInfo:
+ *                          type: object
+ *                          properties:
+ *                                 id:
+ *                                   type: integer
+ *                                   description: ID da requisição
+ *                                 message:
+ *                                   type: string
+ *                                   description: Mensagem da requisição
+ *                      info:
+ *                          type: object
+ *                          properties:
+ *                                 url:
+ *                                   type: string
+ *                                   description: URL da nova imagem
+ *       201:
+ *         description: Erro de upload
+ *         content:
+ *           application/json:
+ *              schema:
+ *                  type: object
+ *                  properties:
+ *                      codeInfo:
+ *                          type: object
+ *                          properties:
+ *                                 id:
+ *                                   type: integer
+ *                                   description: ID da requisição
+ *                                 message:
+ *                                   type: string
+ *                                   description: Mensagem da requisição
+ *       422:
+ *         description: Erro de validação
+ *         content:
+ *           application/json:
+ *              schema:
+ *                  type: object
+ *                  properties:
+ *                      message:
+ *                          type: string
+ *                          description: Menssagem de erro
+ *                      errors:
+ *                          type: string
+ *                          description: Descrição dos erros
+ */
+router.post('/uploadImage', authMiddleware, [
+    body('image').isBase64({ urlSafe: false }),
+], manageToys.uploadImage);
+
 
 module.exports = router;

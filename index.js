@@ -14,8 +14,8 @@ const testRoutes = require('./Routes/test')
 
 const app = express();
 
-app.use(express.urlencoded({ extended: true })) // x-www-form-urlencoded
-app.use(express.json())// json
+app.use(express.urlencoded({ extended: true, limit: '50mb' })) // x-www-form-urlencoded
+app.use(express.json({ limit: '50mb' }))// json
 app.use(cors())
 
 swagger.mountSwagger(app);
