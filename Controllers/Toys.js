@@ -276,7 +276,7 @@ exports.uploadImage = (req, res, next) => {
                     message: "image was uploaded",
                 },
                 info: {
-                    url: "https://drive.google.com/file/d/" + id + "/view?usp=sharing"
+                    url: "https://drive.google.com/uc?export=view&id=" + id 
                 }
             });
         })
