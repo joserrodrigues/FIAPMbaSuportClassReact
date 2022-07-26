@@ -126,6 +126,15 @@ exports.getProducts = (req, res, next) => {
 
     let orderBy = req.query.orderBy || 'name';
     let orderDirection = req.query.orderDirection || 'asc';
+    if(orderBy.toLowerCase() === "undefined"){
+        orderBy = "name"
+    }
+    if (
+      orderDirection.toLowerCase() !== "asc" &&
+      orderDirection.toLowerCase() !== "desc"
+    ) {
+      orderDirection = "asc";
+    }
     let search = req.query.search || '';
 
     let regex = new RegExp(search, 'i');

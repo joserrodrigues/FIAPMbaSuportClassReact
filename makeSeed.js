@@ -8,8 +8,8 @@ mongoose.connect(process.env.MONGO_URL,
   .then(async (result) => {
     console.log("Running");
 
-    // await PersonsSeeder.remove();
-    // await PersonsSeeder.run();
+    await PersonsSeeder.remove();
+    await PersonsSeeder.run();
     await ToysSeeder.remove();
     await ToysSeeder.run();
     process.exit();
