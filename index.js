@@ -10,6 +10,7 @@ const authRoutes = require('./Routes/manageAuthPersons');
 const nextRoutes = require('./Routes/manageNext');
 const storeProductsRoutes = require('./Routes/manageStoreProducts');
 const manageToysRoutes = require('./Routes/manageToys');
+const manageChallengeSAP = require("./Routes/manageChallengeSAP");
 const testRoutes = require('./Routes/test')
 
 const app = express();
@@ -25,6 +26,7 @@ app.use('/authPersons', authRoutes);
 app.use('/api', nextRoutes);
 app.use('/storeProducts', storeProductsRoutes);
 app.use('/toys', manageToysRoutes);
+app.use("/challengeSap", manageChallengeSAP);
 app.use('/', testRoutes);
 
 app.use((error, req, res, next) => {
