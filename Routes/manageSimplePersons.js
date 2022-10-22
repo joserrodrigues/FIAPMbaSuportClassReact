@@ -175,32 +175,17 @@ router.get("/:personID", simplePersonsController.getPerson);
  *                lastName:
  *                  type: string
  *                  description: Último nome da pessoa
- *                phone:
- *                  type: integer
- *                  description: Telefone da pessoa
- *                address:
+ *                CPF:
  *                  type: string
- *                  description: Endereço da pessoa
- *                zipCode:
+ *                  description: CPF da pessoa
+ *                jobTitle:
  *                  type: string
- *                  description: CEP da pessoa
- *                latitude:
- *                  type: double
- *                  description: Latitude da pessoa
- *                longitude:
- *                  type: double
- *                  description: Longitude da pessoa
- *                image:
- *                  type: string
- *                  description: URL com a imagem da pessoa
+ *                  description: Profissão da pessoa
  *             required:
  *               - firstName
  *               - lastName
- *               - phone
- *               - address
- *               - latitude
- *               - longitude
- *               - image
+ *               - CPF
+ *               - jobTitle
  *     responses:
  *       200:
  *         description: Sucesso na requisição
