@@ -4,7 +4,7 @@ exports.getItems = (req, res, next) => {
         { id: 1, name: "1" },
         { id: 2, name: "2" },
         { id: 3, name: "3" },
-        { id: 4, name: "11" },
+        { id: 4, name: "15" },
     ]);
 }
 
@@ -19,7 +19,7 @@ exports.getUserInfo = (req, res, next) => {
     res.status(200).json({
         id: id,
         name: search + ' Doe',
-        phone: '1198986565'
+        phone: '119898888'
     }) 
 }
 

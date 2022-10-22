@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const swagger = require('./Swagger/Swagger')
 
 const manageBooksRoutes = require('./Routes/managePersons')
+const manageSimplePersonRoutes = require("./Routes/manageSimplePersons");
 const authRoutes = require('./Routes/manageAuthPersons');
 const nextRoutes = require('./Routes/manageNext');
 const storeProductsRoutes = require('./Routes/manageStoreProducts');
@@ -22,6 +23,7 @@ app.use(cors())
 swagger.mountSwagger(app);
 
 app.use('/persons', manageBooksRoutes);
+app.use("/simplePersons", manageSimplePersonRoutes);
 app.use('/authPersons', authRoutes);
 app.use('/api', nextRoutes);
 app.use('/storeProducts', storeProductsRoutes);
@@ -44,4 +46,4 @@ mongoose.connect(process.env.MONGO_URL,
 })
 .catch(err => {
     console.log(err);
-})
+})   
