@@ -13,7 +13,7 @@ exports.getPersons = (req, res, next) => {
 
     for (let ind = 0; ind < 100; ind++){
         persons.push({
-            id: ind,
+            _id: ind,
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
             jobTitle: faker.name.jobTitle(),
